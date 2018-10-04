@@ -1,4 +1,4 @@
-package com.pluralsight.calcengine;
+package com.pluralsight.myapp;
 
 import java.util.ArrayList;
 
@@ -43,6 +43,9 @@ public class Main {
         System.out.println("Enum way");
 
         String[] statements = {
+                "add 3",
+                "multiply x 5",
+                "dosomething 5 19",
                 "add 55 12",
                 "subtract 23.2 10",
                 "multiply 5 18",
@@ -51,8 +54,15 @@ public class Main {
 
         CalculateHelper helper = new CalculateHelper();
         for (String statement : statements) {
-            helper.process(statement);
-            System.out.println(helper);
+            try {
+                helper.process(statement);
+                System.out.println(helper);
+            } catch (InvalidStatementException e) {
+                System.out.println(e.getMessage());
+                if (e.getCause() != null) {
+                    System.out.println("Original exception " + e.getCause().getMessage());
+                }
+            }
         }
 
     }
